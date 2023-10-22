@@ -1,0 +1,81 @@
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: 0;
+	box-sizing: border-box;
+	/* color: var(--light1); */
+}
+
+:root {
+	font-size: 10px;
+	/* background colours */
+	--dark1: #0a0a23;
+	--dark2: #1b1b32;
+	--dark3: #2a2a40;
+	--dark4: #3b3b4f;
+	/* text and main highlight colour */
+	--light1: #ffffff;
+	--light2: #f5f6f7;
+	--light3: #dfdfe2;
+	--light4: #d0d0d5;
+	/* accent colour */
+	--purple: #dbb8ff;
+	--darkpurple: #5a01a7;
+	--yellow: #f1be32;
+	--darkyellow: #4d3800;
+	--blue: #99c9ff;
+	--darkblue: #002ead;
+	--green: #acd157;
+	--darkgreen: #00471b;
+}
+
+html {
+	scroll-behavior: smooth;
+	color: var(--light1);
+}
+
+body {
+	background-color: var(--dark1);
+	overflow-y: hidden;
+}
+
+/* Standardise */
+h1 {
+	font-size: 5rem;
+}
+
+h2 {
+	font-size: 4rem;
+}
+
+h3 {
+	font-size: 3rem;
+}
+
+p {
+	font-size: 3rem;
+}
+
+main {
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+	overflow-y: scroll;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* these scrollbar features may not be fully supported yet */
+main::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+main::-webkit-scrollbar-track {
+	background: var(--dark2);
+}
+
+main::-webkit-scrollbar-thumb {
+	background: var(--darkpurple);
+}
