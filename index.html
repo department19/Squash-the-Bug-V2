@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Squash the Bug!</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="stylesheets/stylesheet.css">
+
+    <!-- fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+
+    <script defer src="app.js"></script>
 </head>
+
 <body>
-    
+    <header>
+        <div>
+            <h1>Squash-a-bug!</h1>
+            <p id="description">A simple game where you click the bugs!</p>            
+        </div>
+    </header>
+    <main>
+        <div id="level" class="ui">Level <span id="level-value">1</span></div>
+        <div id="game-area">
+            <div class="hole"></div>
+            <div class="hole"></div>
+            <div class="hole"></div>
+        </div>
+        <div id="score" class="ui">Score: <span id="score-value">0</span></div>
+        <div id="timer" class="ui">Time remaining: <span id="timer-value">30</span></div>
+        <div id="buttonbox">
+            <button id="startGame" class="gamebutton">Start Game</button>
+            <button id="stopGame" class="gamebutton hidden">Stop Game</button>
+        </div>
+    </main>
 </body>
+
 </html>
