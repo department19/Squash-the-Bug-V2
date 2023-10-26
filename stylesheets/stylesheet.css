@@ -3,7 +3,6 @@
 	padding: 0;
 	text-decoration: 0;
 	box-sizing: border-box;
-	/* color: var(--light1); */
 }
 
 :root {
@@ -46,6 +45,7 @@ h1 {
 
 h2 {
 	font-size: 4rem;
+	display: inline-block;
 }
 
 h3 {
@@ -53,13 +53,13 @@ h3 {
 }
 
 p {
-	font-size: 3rem;
+	font-size: 2rem;
+	display: inline-block;
 }
 
-main {
-	scroll-snap-type: y mandatory;
-	height: 100vh;
-	overflow-y: scroll;
+span {
+	font-size: 4rem;
+	margin-left: 1rem ;
 }
 
 a {
@@ -67,15 +67,54 @@ a {
 	color: inherit;
 }
 
-/* these scrollbar features may not be fully supported yet */
-main::-webkit-scrollbar {
-	width: 0.5rem;
+main {
+	scroll-snap-type: y mandatory;
+	height: 100vh;
+	overflow-y: hidden;
 }
 
-main::-webkit-scrollbar-track {
-	background: var(--dark2);
+section {
+	outline: 1px red dashed;
 }
 
-main::-webkit-scrollbar-thumb {
-	background: var(--darkpurple);
+/* info panel components */
+
+#info-panel {
+	position: absolute;
+	top: 50%;
+	left: 0%;
+	width: 15%;
+	transform: translateY(-50%);
+	padding: 2rem;
+}
+
+/* game area elements */
+
+#game-area {
+	position: relative;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 70%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+	padding: 10rem;
+	gap: 20rem;
+}
+
+.hole {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 100px;
+	background-color: var(--bg4);
+	border: 1px solid #f1be32;
+	border-radius: 25%;
+	cursor: pointer;
+}
+
+.hidden {
+	display: none;
 }

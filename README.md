@@ -13,7 +13,6 @@ The core components of the game and JS relating to them from the first iteration
 
 I decided to make this "whack-a-mole" style game as having the mouse input as the main interactive element because it felt more intuitive to me as someone who enjoys shooter games where the mouse is the main input.
 
----
 ## Components
 ### UI Elements
 - Navigation bar to with links to open my web portfolio and the git hub repo of the web game
