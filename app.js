@@ -19,7 +19,19 @@ document.addEventListener("DOMContentLoaded", function() {
     const randomHole = holes[Math.floor(Math.random() * holes.length)];
     randomHole.classList.add("bug");
     randomHole.appendChild(bug);
+    const bugTimeout = setTimeout(() => {
+      randomHole.classList.remove("bug");
+      randomHole.removeChild(bug);
+      if (isGameRunning) {
+        spawnBug();
+      }
+    }, (Math.random() * 10000) + 500 );
   }
+
+  // function removeBug() {
+  //   randomHole.classList.remove("bug");
+  //   randomHole.removeChild(bug);
+  // }
 
   function resetGame() {
     score = 0;
