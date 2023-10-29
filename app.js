@@ -25,7 +25,18 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isGameRunning) {
         spawnBug();
       }
-    }, (Math.random() * 10000) + 500 );
+    }, (Math.random() * 2000) + 10000);
+  }
+
+  function whackBug(target) {
+    target.addEventListener("mousedown", () => {
+      if (isGameRunning && target.classList.contains("bug")) {
+        target.classList.remove("bug");
+        target.removeChild(bug);
+        score++;
+        scoreDisplay.textContent = score;
+      }
+    });
   }
 
   // function removeBug() {
