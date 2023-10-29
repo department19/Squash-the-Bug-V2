@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isGameRunning && target.classList.contains("bug")) {
         target.classList.remove("bug");
         target.removeChild(bug);
+        clearTimeout(bugTimeout);
         score++;
         scoreDisplay.textContent = score;
       }
@@ -49,5 +50,14 @@ document.addEventListener("DOMContentLoaded", function() {
     time = 30;
     scoreDisplay.textContent = score;
     timerDisplay.textContent = time;
+  }
+
+  function stopGame() {
+    clearTimeout(gameTimeout);
+    isGameRunning = false;
+  }
+
+  function startGame() {
+    resetGame();
   }
 });
