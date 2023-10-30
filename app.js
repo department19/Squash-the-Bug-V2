@@ -22,22 +22,29 @@ document.addEventListener("DOMContentLoaded", function() {
     const randomHole = holes[Math.floor(Math.random() * holes.length)];
     randomHole.classList.add("bug");
     randomHole.appendChild(bug);
+    const spawnTimer = ((Math.random() * 5000) + 500);
     bugTimeout = setTimeout(() => {
       randomHole.classList.remove("bug");
       randomHole.removeChild(bug);
-      if (isGameRunning) {
+    }, spawnTimer);
+    if (isGameRunning) {
+      console.log("tick");
+      setTimeout(() => {
+        clearTimeout(bugTimeout);
         spawnBug();
-      }
-    }, (Math.random() * 2000) + 10000);
+      }, (spawnTimer + 500));
+    }
   }
 
   function whackBug(target) {
     target.classList.remove("bug");
     target.removeChild(bug);
-    clearTimeout(bugTimeout);
     score++;
     scoreDisplay.textContent = score;
-    spawnBug();
+    clearTimeout(bugTimeout);
+    setTimeout(() => {
+      spawnBug();
+    }, (Math.random() * 1000));
   }
 
   function resetGame() {
@@ -71,9 +78,9 @@ document.addEventListener("DOMContentLoaded", function() {
       if (hole.contains(bug)) {
         hole.classList.remove("bug");
         hole.removeChild(bug);
-        clearTimeout(bugTimeout);
       }
     });
+    clearTimeout(bugTimeout);
   }
 
   function startGame() {
