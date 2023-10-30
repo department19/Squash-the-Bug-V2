@@ -24,7 +24,19 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 	- score and score required
 
 ### JS Elements
-- 
+- Interactive "bug"
+	- spawning
+	- response on click
+		- adding to score
+		- removal of bug
+	- automatic despawn on timeout
+- timing system
+	- end the game and present the score 
+	- check score to determine level progression
+- Level up system
+	- scale up a threshold for progression
+	- addition of additional elements such as holes etc
+	- scale up difficult with shorter timings of bug spawn and despawn
 
 ## Responsiveness Considerations
 
@@ -34,3 +46,13 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 
 - nav
 - links
+
+### 
+
+
+### Initial commits
+Reused the original HTML but shuffled elements around to compartmentalise them into 3 main parts:
+- header
+- main
+	- info panel
+	- game area
