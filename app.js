@@ -6,20 +6,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
+  const gameStartButton = document.getElementById("startGame");
+  const gameStopButton = document.getElementById("stopGame");
   const bug = document.createElement("img");
-  bug.setAttribute("src", "");
+  bug.setAttribute("src", "assets/green_bug.png");
   bug.id = "bug";
 
-  const gameTimeout = 0;
+  let bugTimeout;
   let score;
   let time;
-  const isGameRunning = false;
+  let timer;
+  let isGameRunning = false;
 
   function spawnBug() {
     const randomHole = holes[Math.floor(Math.random() * holes.length)];
     randomHole.classList.add("bug");
     randomHole.appendChild(bug);
-    const bugTimeout = setTimeout(() => {
+    bugTimeout = setTimeout(() => {
       randomHole.classList.remove("bug");
       randomHole.removeChild(bug);
       if (isGameRunning) {
@@ -29,21 +32,13 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function whackBug(target) {
-    target.addEventListener("mousedown", () => {
-      if (isGameRunning && target.classList.contains("bug")) {
-        target.classList.remove("bug");
-        target.removeChild(bug);
-        clearTimeout(bugTimeout);
-        score++;
-        scoreDisplay.textContent = score;
-      }
-    });
+    target.classList.remove("bug");
+    target.removeChild(bug);
+    clearTimeout(bugTimeout);
+    score++;
+    scoreDisplay.textContent = score;
+    spawnBug();
   }
-
-  // function removeBug() {
-  //   randomHole.classList.remove("bug");
-  //   randomHole.removeChild(bug);
-  // }
 
   function resetGame() {
     score = 0;
@@ -52,12 +47,59 @@ document.addEventListener("DOMContentLoaded", function() {
     timerDisplay.textContent = time;
   }
 
+  function startTimer() {
+    time = 30;
+    timer = setInterval(() => {
+      time--;
+      timerDisplay.textContent = time;
+      if (time <= 0) {
+        stopGame();
+        clearInterval(timer);
+      }
+    }, 1000);
+  }
+
   function stopGame() {
-    clearTimeout(gameTimeout);
+    gameStopButton.classList.add("hidden");
+    gameStartButton.classList.remove("hidden");
     isGameRunning = false;
+    clearInterval(timer);
+    alert("game end");
+    time = 0;
+    timerDisplay.textContent = time;
+    holes.forEach((hole) => {
+      if (hole.contains(bug)) {
+        hole.classList.remove("bug");
+        hole.removeChild(bug);
+        clearTimeout(bugTimeout);
+      }
+    });
   }
 
   function startGame() {
+    console.log("startgame");
+    gameStartButton.classList.add("hidden");
+    gameStopButton.classList.remove("hidden");
     resetGame();
+    if (isGameRunning == false) {
+      isGameRunning = true;
+    }
+    holes.forEach((hole) => {
+      hole.addEventListener("mousedown", () => {
+        if (hole.contains(bug)) {
+          whackBug(hole);
+        }
+      });
+    });
+    startTimer();
+    spawnBug();
   }
+
+  gameStartButton.addEventListener("click", () => {
+    startGame();
+  });
+
+  gameStopButton.addEventListener("click", () => {
+    stopGame();
+  });
 });
