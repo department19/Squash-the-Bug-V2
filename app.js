@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function() {
         whackBug(hole);
       }
     });
-    classObserver.observe(holes, config);
+    classObserver.observe(hole, config);
   });
 
   gameStartButton.addEventListener("click", () => {
