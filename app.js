@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     attributeFilter: ["class"],
   };
 
-  const spawnTimer = 2000;
+  const spawnTimer = 1000;
   let score;
   let time;
   let timer;
@@ -26,24 +26,24 @@ document.addEventListener("DOMContentLoaded", function() {
   let randomHole;
 
   function spawnBug() {
-    if (isGameRunning) {
-      console.log("spawn");
-      randomHole = holes[Math.floor(Math.random() * holes.length)];
-      randomHole.classList.add("bug");
-      bugFlee(randomHole);
-    }
+    setTimeout(() => {
+      if (isGameRunning) {
+        console.log("spawn");
+        randomHole = holes[Math.floor(Math.random() * holes.length)];
+        randomHole.classList.add("bug");
+        bugFlee(randomHole);
+      }
+    }, spawnTimer);
   }
 
   function bugFlee(element) {
-    if (element.contains(bug)) {
+    console.log("flee");
+    if (element.classList.contains("bug")) {
       setTimeout(() => {
-        console.log("flee");
         element.classList.remove("bug");
       }, 5000);
       if (isGameRunning) {
-        setTimeout(() => {
-          spawnBug();
-        }, spawnTimer);
+        spawnBug();
       }
     }
   }
@@ -54,9 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
     score++;
     scoreDisplay.textContent = score;
     if (isGameRunning) {
-      setTimeout(() => {
-        spawnBug();
-      }, spawnTimer);
+      spawnBug();
     }
   }
 
