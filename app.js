@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // element.removeChild(bug);
     score++;
     scoreDisplay.textContent = score;
-    clearTimeout(bugTimeout);
+    // clearTimeout(bugTimeout);
     if (isGameRunning) {
       setTimeout(() => {
         spawnBug();
@@ -95,10 +95,10 @@ document.addEventListener("DOMContentLoaded", function() {
     holes.forEach((hole) => {
       if (hole.contains(bug)) {
         hole.classList.remove("bug");
-        hole.removeChild(bug);
+        // hole.removeChild(bug);
       }
     });
-    clearTimeout(bugTimeout);
+    // clearTimeout(bugTimeout);
   }
 
   function startGame() {
@@ -114,10 +114,10 @@ document.addEventListener("DOMContentLoaded", function() {
   function bugClass(mutationList, observer) {
     for (const mutation of mutationList) {
       if (mutation.type === "attributes" && mutation.attributeName === "class") {
-        if (mutation.classList.contains("bug")) {
-          mutation.appendChild(bug);
+        if (mutation.target.classList.contains("bug")) {
+          mutation.target.appendChild(bug);
         } else {
-          mutation.removeChild(bug);
+          mutation.target.removeChild(bug);
         }
       }
     }
