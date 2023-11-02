@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const holes = document.querySelectorAll(".hole");
   // will make an arraylike nodelist of the holes
   // will the const make it not update when i add more?
-  //   maybe need to make this a function to update on addition?
+  // maybe need to make this a function to update on addition?
 
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function() {
   };
 
   const spawnTimer = 2000;
-  // let bugTimeout;
   let score;
   let time;
   let timer;
@@ -31,9 +30,8 @@ document.addEventListener("DOMContentLoaded", function() {
       console.log("spawn");
       randomHole = holes[Math.floor(Math.random() * holes.length)];
       randomHole.classList.add("bug");
-      // randomHole.appendChild(bug);
+      bugFlee(randomHole);
     }
-    bugFlee(randomHole);
   }
 
   function bugFlee(element) {
@@ -41,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function() {
       setTimeout(() => {
         console.log("flee");
         element.classList.remove("bug");
-        // element.removeChild(bug);
       }, 5000);
       if (isGameRunning) {
         setTimeout(() => {
@@ -54,10 +51,8 @@ document.addEventListener("DOMContentLoaded", function() {
   function whackBug(element) {
     console.log("whack");
     element.classList.remove("bug");
-    // element.removeChild(bug);
     score++;
     scoreDisplay.textContent = score;
-    // clearTimeout(bugTimeout);
     if (isGameRunning) {
       setTimeout(() => {
         spawnBug();
@@ -95,10 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
     holes.forEach((hole) => {
       if (hole.contains(bug)) {
         hole.classList.remove("bug");
-        // hole.removeChild(bug);
       }
     });
-    // clearTimeout(bugTimeout);
   }
 
   function startGame() {
