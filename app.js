@@ -12,39 +12,57 @@ document.addEventListener("DOMContentLoaded", function() {
   bug.setAttribute("src", "assets/green_bug.png");
   bug.id = "bug";
 
+  const spawnTimer = 2000;
   let bugTimeout;
   let score;
   let time;
   let timer;
   let isGameRunning = false;
+  let randomHole;
 
   function spawnBug() {
-    const randomHole = holes[Math.floor(Math.random() * holes.length)];
+    console.log("spawn");
+    randomHole = holes[Math.floor(Math.random() * holes.length)];
     randomHole.classList.add("bug");
     randomHole.appendChild(bug);
-    const spawnTimer = ((Math.random() * 5000) + 500);
-    bugTimeout = setTimeout(() => {
-      randomHole.classList.remove("bug");
-      randomHole.removeChild(bug);
-    }, spawnTimer);
-    if (isGameRunning) {
-      console.log("tick");
-      setTimeout(() => {
-        clearTimeout(bugTimeout);
-        spawnBug();
-      }, (spawnTimer + 500));
-    }
+    // spawnTimer = ((Math.random() * 5000) + 500);
+    // bugTimeout = setTimeout(() => {
+    //   randomHole.classList.remove("bug");
+    //   randomHole.removeChild(bug);
+    // }, spawnTimer);
+    // if (isGameRunning) {
+    //   setTimeout(() => {
+    //     spawnBug();
+    //   }, (spawnTimer + 500));
+    // } else {
+    //   clearTimeout(bugTimeout);
+    // }
   }
 
-  function whackBug(target) {
-    target.classList.remove("bug");
-    target.removeChild(bug);
+  function whackBug(element) {
+    console.log("whack");
+    element.classList.remove("bug");
+    element.removeChild(bug);
     score++;
     scoreDisplay.textContent = score;
     clearTimeout(bugTimeout);
-    setTimeout(() => {
-      spawnBug();
-    }, (Math.random() * 1000));
+    if (isGameRunning) {
+      setTimeout(() => {
+        spawnBug();
+      }, spawnTimer);
+    }
+  }
+
+  function bugFlee(element) {
+    console.log("flee");
+    element.classList.remove("bug");
+    element.removeChild(bug);
+    clearTimeout(bugTimeout);
+    if (isGameRunning) {
+      setTimeout(() => {
+        spawnBug();
+      }, spawnTimer);
+    }
   }
 
   function resetGame() {
@@ -67,9 +85,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function stopGame() {
+    isGameRunning = false;
     gameStopButton.classList.add("hidden");
     gameStartButton.classList.remove("hidden");
-    isGameRunning = false;
     clearInterval(timer);
     alert("game end");
     time = 0;
@@ -78,6 +96,11 @@ document.addEventListener("DOMContentLoaded", function() {
       if (hole.contains(bug)) {
         hole.classList.remove("bug");
         hole.removeChild(bug);
+        // hole.removeEventListener("mousedown", () => {
+        //   if (hole.contains(bug)) {
+        //     whackBug(hole);
+        //   }
+        // });
       }
     });
     clearTimeout(bugTimeout);
@@ -88,9 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStartButton.classList.add("hidden");
     gameStopButton.classList.remove("hidden");
     resetGame();
-    if (isGameRunning == false) {
-      isGameRunning = true;
-    }
+    isGameRunning = true;
     holes.forEach((hole) => {
       hole.addEventListener("mousedown", () => {
         if (hole.contains(bug)) {
@@ -101,6 +122,14 @@ document.addEventListener("DOMContentLoaded", function() {
     startTimer();
     spawnBug();
   }
+
+  holes.forEach(function(hole) {
+    hole.addEventListener("mousedown", function() {
+      if (isGameRunning && hole.classList.contains("bug")) {
+        whackBug(hole);
+      }
+    });
+  });
 
   gameStartButton.addEventListener("click", () => {
     startGame();
