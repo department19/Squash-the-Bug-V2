@@ -18,59 +18,64 @@ document.addEventListener("DOMContentLoaded", function() {
     attributeFilter: ["class"],
   };
 
-  const spawnTimer = 1000;
-  let score;
+  // const spawnTimer = 1000;
+  let score = 0;
   let time;
   let timer;
   let isGameRunning = false;
   let randomHole;
+  let bugFleeTimer;
 
   function spawnBug() {
-    setTimeout(() => {
-      if (isGameRunning) {
-        console.log("spawn");
-        randomHole = holes[Math.floor(Math.random() * holes.length)];
-        randomHole.classList.add("bug");
+    if (isGameRunning) {
+      console.log("spawn");
+      randomHole = holes[Math.floor(Math.random() * holes.length)];
+      randomHole.classList.add("bug");
+      bugFleeTimer = setTimeout(() => {
         bugFlee(randomHole);
-      }
-    }, spawnTimer);
+      }, 5000);
+    }
   }
 
   function bugFlee(element) {
     console.log("flee");
     if (element.classList.contains("bug")) {
+      element.classList.remove("bug");
       setTimeout(() => {
-        element.classList.remove("bug");
-      }, 5000);
-      if (isGameRunning) {
-        spawnBug();
-      }
+        if (isGameRunning) {
+          spawnBug();
+        }
+      }, 2000);
     }
   }
 
   function whackBug(element) {
     console.log("whack");
     element.classList.remove("bug");
+    clearTimeout(bugFleeTimer);
     score++;
     scoreDisplay.textContent = score;
-    if (isGameRunning) {
-      spawnBug();
-    }
+    setTimeout(() => {
+      if (isGameRunning) {
+        spawnBug();
+      }
+    }, 1000);
   }
 
   function resetGame() {
     score = 0;
-    time = 30;
+    time = 0;
     scoreDisplay.textContent = score;
     timerDisplay.textContent = time;
   }
 
   function startTimer() {
     time = 30;
+    timerDisplay.textContent = time;
     timer = setInterval(() => {
       time--;
       timerDisplay.textContent = time;
-      if (time <= 0) {
+      if (time < 0) {
         stopGame();
         clearInterval(timer);
       }
@@ -83,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStartButton.classList.remove("hidden");
     clearInterval(timer);
     alert("game end");
-    time = 0;
+    resetGame();
     timerDisplay.textContent = time;
     holes.forEach((hole) => {
       if (hole.contains(bug)) {
@@ -96,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("startgame");
     gameStartButton.classList.add("hidden");
     gameStopButton.classList.remove("hidden");
-    resetGame();
     isGameRunning = true;
     startTimer();
     spawnBug();
@@ -107,7 +111,10 @@ document.addEventListener("DOMContentLoaded", function() {
       if (mutation.type === "attributes" && mutation.attributeName === "class") {
         if (mutation.target.classList.contains("bug")) {
           mutation.target.appendChild(bug);
+          console.log("added bug");
+          console.log(mutation.target.children);
         } else {
+          console.log("removed bug");
           mutation.target.removeChild(bug);
         }
       }
