@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   const holes = document.querySelectorAll(".hole");
   // will make an arraylike nodelist of the holes
   // will the const make it not update when i add more?
-  //   maybe need to make this a function to update on addition?
+  // maybe need to make this a function to update on addition?
 
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
@@ -12,47 +12,70 @@ document.addEventListener("DOMContentLoaded", function() {
   bug.setAttribute("src", "assets/green_bug.png");
   bug.id = "bug";
 
-  let bugTimeout;
-  let score;
+  const classObserver = new MutationObserver(bugClass);
+  const config = {
+    attributes: true,
+    attributeFilter: ["class"],
+  };
+
+  // const spawnTimer = 1000;
+  let score = 0;
   let time;
   let timer;
   let isGameRunning = false;
+  let randomHole;
+  let bugFleeTimer;
 
   function spawnBug() {
-    const randomHole = holes[Math.floor(Math.random() * holes.length)];
-    randomHole.classList.add("bug");
-    randomHole.appendChild(bug);
-    bugTimeout = setTimeout(() => {
-      randomHole.classList.remove("bug");
-      randomHole.removeChild(bug);
+    if (isGameRunning) {
+      console.log("spawn");
+      randomHole = holes[Math.floor(Math.random() * holes.length)];
+      randomHole.classList.add("bug");
+      bugFleeTimer = setTimeout(() => {
+        bugFlee(randomHole);
+      }, 5000);
+    }
+  }
+
+  function bugFlee(element) {
+    console.log("flee");
+    if (element.classList.contains("bug")) {
+      element.classList.remove("bug");
+      setTimeout(() => {
+        if (isGameRunning) {
+          spawnBug();
+        }
+      }, 2000);
+    }
+  }
+
+  function whackBug(element) {
+    console.log("whack");
+    element.classList.remove("bug");
+    clearTimeout(bugFleeTimer);
+    score++;
+    scoreDisplay.textContent = score;
+    setTimeout(() => {
       if (isGameRunning) {
         spawnBug();
       }
-    }, (Math.random() * 2000) + 10000);
-  }
-
-  function whackBug(target) {
-    target.classList.remove("bug");
-    target.removeChild(bug);
-    clearTimeout(bugTimeout);
-    score++;
-    scoreDisplay.textContent = score;
-    spawnBug();
+    }, 1000);
   }
 
   function resetGame() {
     score = 0;
-    time = 30;
+    time = 0;
     scoreDisplay.textContent = score;
     timerDisplay.textContent = time;
   }
 
   function startTimer() {
     time = 30;
+    timerDisplay.textContent = time;
     timer = setInterval(() => {
       time--;
       timerDisplay.textContent = time;
-      if (time <= 0) {
+      if (time < 0) {
         stopGame();
         clearInterval(timer);
       }
@@ -60,18 +83,16 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function stopGame() {
+    isGameRunning = false;
     gameStopButton.classList.add("hidden");
     gameStartButton.classList.remove("hidden");
-    isGameRunning = false;
     clearInterval(timer);
     alert("game end");
-    time = 0;
+    resetGame();
     timerDisplay.textContent = time;
     holes.forEach((hole) => {
       if (hole.contains(bug)) {
         hole.classList.remove("bug");
-        hole.removeChild(bug);
-        clearTimeout(bugTimeout);
       }
     });
   }
@@ -80,20 +101,34 @@ document.addEventListener("DOMContentLoaded", function() {
     console.log("startgame");
     gameStartButton.classList.add("hidden");
     gameStopButton.classList.remove("hidden");
-    resetGame();
-    if (isGameRunning == false) {
-      isGameRunning = true;
-    }
-    holes.forEach((hole) => {
-      hole.addEventListener("mousedown", () => {
-        if (hole.contains(bug)) {
-          whackBug(hole);
-        }
-      });
-    });
+    isGameRunning = true;
     startTimer();
     spawnBug();
   }
+
+  function bugClass(mutationList, observer) {
+    for (const mutation of mutationList) {
+      if (mutation.type === "attributes" && mutation.attributeName === "class") {
+        if (mutation.target.classList.contains("bug")) {
+          mutation.target.appendChild(bug);
+          console.log("added bug");
+          console.log(mutation.target.children);
+        } else {
+          console.log("removed bug");
+          mutation.target.removeChild(bug);
+        }
+      }
+    }
+  }
+
+  holes.forEach((hole) => {
+    hole.addEventListener("mousedown", function() {
+      if (isGameRunning && hole.classList.contains("bug")) {
+        whackBug(hole);
+      }
+    });
+    classObserver.observe(hole, config);
+  });
 
   gameStartButton.addEventListener("click", () => {
     startGame();

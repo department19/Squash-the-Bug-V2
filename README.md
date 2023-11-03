@@ -39,6 +39,7 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 	- scale up difficult with shorter timings of bug spawn and despawn
 
 ## Responsiveness Considerations
+The game cannot work on a phone screen right now
 
 ## Bugs
 
