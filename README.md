@@ -42,14 +42,30 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 The game cannot work on a phone screen right now
 
 ## Bugs
+- ~~constant problem of the childNode of bug not existing when attempting removal~~
+	- the timings on class removal and were off, and as such the mutation observer wasn't functioning properly.
 
 ## Development Log
 
-- nav
-- links
+- [Mutation observer](#mutation-observer)
+- [Core Mechanics Rework](#core-mechanics-rework)
 
-### 
+### Mutation observer
+originally the visible "bug" element was hard coded in to appear along side addition and removal of the class of the parent hole div.
+I moved away from this and had the visible element respond to whether the parent had the class of "bug" to then append or remove the child img. Using the mutation observer, each "hole" would be tracked for changes in it's class attributes and trigger the function to append or remove child to the conditions.
+### Core mechanics rework
 
+From the code with the first iteration I attempted to keep the same functionality and processes but restructured parts to have individual functions to be split apart:
+#### Bug spawning and fleeing
+`spawnBug` and `bugFlee` functions were previously a singular function that would recursively repeat itself on a timeout. Now with it separated it is possible to separately adjust the timings of each and possible to have a `clearTimeout` with the `whackBug` function without it breaking the game.
+
+#### Bug whacking
+all of the bug removal code based on the user clicking was within event listener block attached to each hole. This has now been moved into it's own function which can be call in response to the "mousedown" event listener
+
+#### Timer
+The timer was previously very inefficiently split into 2 parts, one part being the one functioning with the game, and the other being the visible element. In the first iteration, I felt that using `setTimeout` as the timer to functionally end the game was the simplest option. but as it's format was in milliseconds made it hard to make a presentable timer for the user. As such a separate function with `setinterval` was made. Coming back to this code I realised this is very unnecessary and removed the `setTimeout` function and added conditional statements in the `setInterval` to end the game.
+P.S. It should be noted that I don't know when it ends it won't show 0 before the alert :/
+P.S.2 OH I believe following what is mentioned in "In The Loop" presentation 2018 by Jake Archibald (https://youtu.be/cCOL7MC4Pl0), since all of the JS tasks are completed, the rendering processes happens in a set order determined by the browser and as such the alert is rendered first and will never present as 0 before the alert. this problem can kind of be hacked by just by altering the conditional to be "time < 0" instead of "time <= 0" thought technically the time may not be true. this will need further reading. 
 
 ### Initial commits
 Reused the original HTML but shuffled elements around to compartmentalise them into 3 main parts:

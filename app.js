@@ -84,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStopButton.classList.add("hidden");
     gameStartButton.classList.remove("hidden");
     clearInterval(timer);
+    clearTimeout(bugFleeTimer);
     alert("game end");
     resetGame();
     timerDisplay.textContent = time;
