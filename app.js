@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function spawnBug() {
     if (isGameRunning) {
-      console.log("spawn");
       randomHole = holes[Math.floor(Math.random() * holes.length)];
       randomHole.classList.add("bug");
       bugFleeTimer = setTimeout(() => {
@@ -38,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function bugFlee(element) {
-    console.log("flee");
     if (element.classList.contains("bug")) {
       element.classList.remove("bug");
       setTimeout(() => {
@@ -50,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function whackBug(element) {
-    console.log("whack");
     element.classList.remove("bug");
     clearTimeout(bugFleeTimer);
     score++;
@@ -111,10 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (mutation.type === "attributes" && mutation.attributeName === "class") {
         if (mutation.target.classList.contains("bug")) {
           mutation.target.appendChild(bug);
-          console.log("added bug");
-          console.log(mutation.target.children);
         } else {
-          console.log("removed bug");
           mutation.target.removeChild(bug);
         }
       }
