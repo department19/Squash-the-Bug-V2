@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let isGameRunning = false;
   let randomHole;
   let bugFleeTimer;
-  let level;
+  let level = 0;
   let spawnTimer = 2000;
   let fleeTimer = 5000;
   let whackTimer = 1000;
@@ -67,6 +67,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // level functionality
 
   function levelAdjustment() {
+    if (level < 1) {
+      level = 1;
+      console.log("set level 1");
+    }
     switch (level) {
       case 1:
         spawnTimer = 2000;
@@ -89,6 +93,37 @@ document.addEventListener("DOMContentLoaded", function() {
         whackTimer = 1000;
         break;
     };
+  }
+
+  function levelProgress() {
+    console.log("level up?");
+    switch (level) {
+      case 1:
+        if (score >= 20) {
+          level++;
+          console.log("level up to 2");
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 2:
+        if (score >= 40) {
+          level++;
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 3:
+        if (score >= 60) {
+          level++;
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 4:
+        break;
+    };
+    console.log(level);
   }
 
   // Timer and start trigger
@@ -120,6 +155,7 @@ document.addEventListener("DOMContentLoaded", function() {
     clearInterval(timer);
     clearTimeout(bugFleeTimer);
     alert("game end");
+    levelProgress();
     resetGame();
     timerDisplay.textContent = time;
     holes.forEach((hole) => {
