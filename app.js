@@ -18,13 +18,18 @@ document.addEventListener("DOMContentLoaded", function() {
     attributeFilter: ["class"],
   };
 
-  // const spawnTimer = 1000;
   let score = 0;
   let time;
   let timer;
   let isGameRunning = false;
   let randomHole;
   let bugFleeTimer;
+  let level;
+  let spawnTimer = 2000;
+  let fleeTimer = 5000;
+  let whackTimer = 1000;
+
+  // game functionality
 
   function spawnBug() {
     if (isGameRunning) {
@@ -32,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function() {
       randomHole.classList.add("bug");
       bugFleeTimer = setTimeout(() => {
         bugFlee(randomHole);
-      }, 5000);
+      }, fleeTimer);
     }
   }
 
@@ -43,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isGameRunning) {
           spawnBug();
         }
-      }, 2000);
+      }, spawnTimer);
     }
   }
 
@@ -56,8 +61,37 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isGameRunning) {
         spawnBug();
       }
-    }, 1000);
+    }, whackTimer);
   }
+
+  // level functionality
+
+  function levelAdjustment() {
+    switch (level) {
+      case 1:
+        spawnTimer = 2000;
+        fleeTimer = 5000;
+        whackTimer = 1000;
+        break;
+      case 2:
+        spawnTimer = 2000;
+        fleeTimer = 4000;
+        whackTimer = 1000;
+        break;
+      case 3:
+        spawnTimer = 2000;
+        fleeTimer = 3000;
+        whackTimer = 1000;
+        break;
+      case 4:
+        spawnTimer = 2000;
+        fleeTimer = 2000;
+        whackTimer = 1000;
+        break;
+    };
+  }
+
+  // Timer and start trigger
 
   function resetGame() {
     score = 0;
@@ -100,9 +134,13 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStartButton.classList.add("hidden");
     gameStopButton.classList.remove("hidden");
     isGameRunning = true;
+    levelAdjustment();
+    console.log(fleeTimer);
     startTimer();
     spawnBug();
   }
+
+  // tracking
 
   function bugClass(mutationList, observer) {
     for (const mutation of mutationList) {
@@ -124,6 +162,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     classObserver.observe(hole, config);
   });
+
+  // UI functionality
 
   gameStartButton.addEventListener("click", () => {
     startGame();
