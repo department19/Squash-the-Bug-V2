@@ -132,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("last level complete");
         break;
     };
-    console.log(level);
     levelDisplay.textContent = level;
   }
 
