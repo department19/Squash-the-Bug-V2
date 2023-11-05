@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
+  const levelDisplay = document.getElementById("level-value");
   const gameStartButton = document.getElementById("startGame");
   const gameStopButton = document.getElementById("stopGame");
   const bug = document.createElement("img");
@@ -18,13 +19,18 @@ document.addEventListener("DOMContentLoaded", function() {
     attributeFilter: ["class"],
   };
 
-  // const spawnTimer = 1000;
   let score = 0;
   let time;
   let timer;
   let isGameRunning = false;
   let randomHole;
   let bugFleeTimer;
+  let level = 0;
+  let spawnTimer = 2000;
+  let fleeTimer = 5000;
+  let whackTimer = 1000;
+
+  // game functionality
 
   function spawnBug() {
     if (isGameRunning) {
@@ -32,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
       randomHole.classList.add("bug");
       bugFleeTimer = setTimeout(() => {
         bugFlee(randomHole);
-      }, 5000);
+      }, fleeTimer);
     }
   }
 
@@ -43,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (isGameRunning) {
           spawnBug();
         }
-      }, 2000);
+      }, spawnTimer);
     }
   }
 
@@ -56,8 +62,80 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isGameRunning) {
         spawnBug();
       }
-    }, 1000);
+    }, whackTimer);
   }
+
+  // level functionality
+
+  function levelAdjustment() {
+    if (level < 1) {
+      level = 1;
+      console.log("set level 1");
+    }
+    switch (level) {
+      case 1:
+        spawnTimer = 2000;
+        fleeTimer = 5000;
+        whackTimer = 1000;
+        console.log("difficulty adjusted");
+        break;
+      case 2:
+        spawnTimer = 2000;
+        fleeTimer = 4000;
+        whackTimer = 1000;
+        console.log("difficulty adjusted");
+        break;
+      case 3:
+        spawnTimer = 2000;
+        fleeTimer = 3000;
+        whackTimer = 1000;
+        console.log("difficulty adjusted");
+        break;
+      case 4:
+        spawnTimer = 2000;
+        fleeTimer = 2000;
+        whackTimer = 1000;
+        console.log("difficulty adjusted");
+        break;
+    };
+    levelDisplay.textContent = level;
+  }
+
+  function levelProgress() {
+    console.log("level up?");
+    switch (level) {
+      case 1:
+        if (score >= 10) {
+          level++;
+          console.log("level up");
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 2:
+        if (score >= 20) {
+          level++;
+          console.log("level up");
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 3:
+        if (score >= 30) {
+          level++;
+          console.log("level up");
+        } else {
+          console.log("fail");
+        }
+        break;
+      case 4:
+        console.log("last level complete");
+        break;
+    };
+    levelDisplay.textContent = level;
+  }
+
+  // Timer and start trigger
 
   function resetGame() {
     score = 0;
@@ -86,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function() {
     clearInterval(timer);
     clearTimeout(bugFleeTimer);
     alert("game end");
+    levelProgress();
     resetGame();
     timerDisplay.textContent = time;
     holes.forEach((hole) => {
@@ -100,9 +179,13 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStartButton.classList.add("hidden");
     gameStopButton.classList.remove("hidden");
     isGameRunning = true;
+    levelAdjustment();
+    console.log(fleeTimer);
     startTimer();
     spawnBug();
   }
+
+  // tracking
 
   function bugClass(mutationList, observer) {
     for (const mutation of mutationList) {
@@ -124,6 +207,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     classObserver.observe(hole, config);
   });
+
+  // UI functionality
 
   gameStartButton.addEventListener("click", () => {
     startGame();
