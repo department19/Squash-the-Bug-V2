@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
+  const levelDisplay = document.getElementById("level-value");
   const gameStartButton = document.getElementById("startGame");
   const gameStopButton = document.getElementById("stopGame");
   const bug = document.createElement("img");
@@ -76,54 +77,63 @@ document.addEventListener("DOMContentLoaded", function() {
         spawnTimer = 2000;
         fleeTimer = 5000;
         whackTimer = 1000;
+        console.log("difficult adjusted");
         break;
       case 2:
         spawnTimer = 2000;
         fleeTimer = 4000;
         whackTimer = 1000;
+        console.log("difficult adjusted");
         break;
       case 3:
         spawnTimer = 2000;
         fleeTimer = 3000;
         whackTimer = 1000;
+        console.log("difficult adjusted");
         break;
       case 4:
         spawnTimer = 2000;
         fleeTimer = 2000;
         whackTimer = 1000;
+        console.log("difficult adjusted");
         break;
     };
+    levelDisplay.textContent = level;
   }
 
   function levelProgress() {
     console.log("level up?");
     switch (level) {
       case 1:
-        if (score >= 20) {
+        if (score >= 10) {
           level++;
-          console.log("level up to 2");
+          console.log("level up");
         } else {
           console.log("fail");
         }
         break;
       case 2:
-        if (score >= 40) {
+        if (score >= 20) {
           level++;
+          console.log("level up");
         } else {
           console.log("fail");
         }
         break;
       case 3:
-        if (score >= 60) {
+        if (score >= 30) {
           level++;
+          console.log("level up");
         } else {
           console.log("fail");
         }
         break;
       case 4:
+        console.log("last level complete");
         break;
     };
     console.log(level);
+    levelDisplay.textContent = level;
   }
 
   // Timer and start trigger
