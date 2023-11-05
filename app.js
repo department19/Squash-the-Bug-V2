@@ -77,25 +77,25 @@ document.addEventListener("DOMContentLoaded", function() {
         spawnTimer = 2000;
         fleeTimer = 5000;
         whackTimer = 1000;
-        console.log("difficult adjusted");
+        console.log("difficulty adjusted");
         break;
       case 2:
         spawnTimer = 2000;
         fleeTimer = 4000;
         whackTimer = 1000;
-        console.log("difficult adjusted");
+        console.log("difficulty adjusted");
         break;
       case 3:
         spawnTimer = 2000;
         fleeTimer = 3000;
         whackTimer = 1000;
-        console.log("difficult adjusted");
+        console.log("difficulty adjusted");
         break;
       case 4:
         spawnTimer = 2000;
         fleeTimer = 2000;
         whackTimer = 1000;
-        console.log("difficult adjusted");
+        console.log("difficulty adjusted");
         break;
     };
     levelDisplay.textContent = level;
