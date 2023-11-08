@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const holes = document.querySelectorAll(".hole");
+  let holes = document.querySelectorAll(".hole");
   // will make an arraylike nodelist of the holes
   // will the const make it not update when i add more?
   // maybe need to make this a function to update on addition?
@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", function() {
   const bug = document.createElement("img");
   bug.setAttribute("src", "assets/green_bug.png");
   bug.id = "bug";
+  const gameArea = document.getElementById("game-area");
+  const hole = document.createElement("div");
+  hole.setAttribute("class", "hole");
+  const addHoleButton = document.getElementById("addHole");
 
   const classObserver = new MutationObserver(bugClass);
   const config = {
@@ -34,7 +38,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   function spawnBug() {
     if (isGameRunning) {
-      randomHole = holes[Math.floor(Math.random() * holes.length)];
+      const randomNumber = Math.floor(Math.random() * holes.length);
+      console.log(randomNumber);
+      randomHole = holes[randomNumber];
       randomHole.classList.add("bug");
       bugFleeTimer = setTimeout(() => {
         bugFlee(randomHole);
@@ -66,6 +72,17 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   // level functionality
+
+  function levelUpHoles() {
+    gameArea.appendChild(hole.cloneNode(true));
+    // maybe have for loop ??
+    holes = document.querySelectorAll(".hole");
+    console.log(holes);
+  }
+
+  addHoleButton.addEventListener("click", () => {
+    levelUpHoles();
+  });
 
   function levelAdjustment() {
     if (level < 1) {
