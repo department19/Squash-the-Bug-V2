@@ -47,9 +47,19 @@ The game cannot work on a phone screen right now
 
 ## Development Log
 
+- [Level up system](#level-up-system)
 - [Mutation observer](#mutation-observer)
 - [Core Mechanics Rework](#core-mechanics-rework)
 
+### Level up system
+
+I've set up a basic level up system using 2 functions.
+
+One functions is called `levelAdjustment` where using a switch statement it will check level value and adjust the timers of everything according to the difficulty I want at each level, this function also includes a check of if there is any level value set at all, if it isn't it'll assign it to 1.
+
+The other function `levelProgress`, it checks the score at the game depending on different thresholds set up within a switch statement, and adds to the level value if `score > "threshold"`.
+
+This current format is still very much hard coded and will need to be revamped in the future.
 ### Mutation observer
 originally the visible "bug" element was hard coded in to appear along side addition and removal of the class of the parent hole div.
 I moved away from this and had the visible element respond to whether the parent had the class of "bug" to then append or remove the child img. Using the mutation observer, each "hole" would be tracked for changes in it's class attributes and trigger the function to append or remove child to the conditions.
