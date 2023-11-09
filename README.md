@@ -52,7 +52,11 @@ The game cannot work on a phone screen right now
 - [Core Mechanics Rework](#core-mechanics-rework)
 
 ### Level up system
+#### 0.2
+added function to create new holes and bound it to a button for testing. With the test, as suspected the new holes won't be tracked as the tracking is applied on the DOM initialisation and as such the new elements cloned post initialisation will not be tracked.
+An initial easy fix for part of this problem, the nodelist for `holes` can be redefined if I declare it initially as a `let` statement and re assign it after adding the holes. But the event listener and mutation observer aren't as easy to solve and reapplying them across the whole nodelist will mean there will be multiple stacked on the previously tracked elements which can cause problems and take a lot of unnecessary resources.
 
+#### 0.1
 I've set up a basic level up system using 2 functions.
 
 One functions is called `levelAdjustment` where using a switch statement it will check level value and adjust the timers of everything according to the difficulty I want at each level, this function also includes a check of if there is any level value set at all, if it isn't it'll assign it to 1.
