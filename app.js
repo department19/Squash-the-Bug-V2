@@ -197,6 +197,7 @@ document.addEventListener("DOMContentLoaded", function() {
     gameStopButton.classList.remove("hidden");
     isGameRunning = true;
     levelAdjustment();
+    applyTracking();
     console.log(fleeTimer);
     startTimer();
     spawnBug();
@@ -216,14 +217,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  holes.forEach((hole) => {
-    hole.addEventListener("mousedown", function() {
-      if (isGameRunning && hole.classList.contains("bug")) {
-        whackBug(hole);
+  function applyTracking() {
+    holes.forEach((hole) => {
+      if (!hole.hasEventListener) {
+        hole.addEventListener("mousedown", function() {
+          if (isGameRunning && hole.classList.contains("bug")) {
+            whackBug(hole);
+          }
+        });
+        hole.hasEventListener = true;
+      }
+      if (!hole.hasMutationObserver) {
+        classObserver.observe(hole, config);
+        hole.hasMutationObserver = true;
       }
     });
-    classObserver.observe(hole, config);
-  });
+  }
 
   // UI functionality
 
