@@ -128,28 +128,35 @@ document.addEventListener("DOMContentLoaded", function() {
         if (score >= 10) {
           level++;
           console.log("level up");
+          alert("level up!");
         } else {
           console.log("fail");
+          alert("failed");
         }
         break;
       case 2:
         if (score >= 15) {
           level++;
           console.log("level up");
+          alert("level up!");
         } else {
           console.log("fail");
+          alert("failed");
         }
         break;
       case 3:
         if (score >= 20) {
           level++;
           console.log("level up");
+          alert("level up!");
         } else {
           console.log("fail");
+          alert("failed");
         }
         break;
       case 4:
         console.log("last level complete");
+        alert("this is the last level");
         break;
     };
     levelDisplay.textContent = level;
