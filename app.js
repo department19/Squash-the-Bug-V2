@@ -286,5 +286,5 @@ document.addEventListener("DOMContentLoaded", function() {
   gameStopButton.addEventListener("click", () => {
     stopGame();
   });
-  level = 6;
+  // level = 6;
 });
