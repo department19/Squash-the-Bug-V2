@@ -39,7 +39,7 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 	- scale up difficult with shorter timings of bug spawn and despawn
 
 ## Responsiveness Considerations
-The game cannot work on a phone screen right now
+Using `@media` rules, currently the game should be playable on mobile devices, and the game area is also adjusted for smaller screens too. Though further testing is required to see across varying mobile devices.
 
 ## Bugs
 - ~~constant problem of the childNode of bug not existing when attempting removal~~
@@ -47,11 +47,20 @@ The game cannot work on a phone screen right now
 
 ## Development Log
 
+- [Responsiveness](#responsiveness-additions)
 - [Level up system](#level-up-system)
 - [Mutation observer](#mutation-observer)
 - [Core Mechanics Rework](#core-mechanics-rework)
 
+### Responsiveness additions 
+#### 0.1
+Using the `@media` rule, the game now positions the game area and holes in a playable manner. I for the mean time completely removed the header for mobile devices to accommodate more space.
+I also adjusted the flexbox properties to place the holes better across all devices since the previous gaps of 10rem were way too much.
+
 ### Level up system
+#### 0.3
+The levelling system is now in a solid workable state; the problem with the tracking application has been resolved, the use of an if statement to check for custom properties `hasEventLister` and `hasMutationObserver` allows hole to be checked if it has either and apply them if they do not. The difficulty via the timing of the bug spawning and fleeing have been changed so that the game is engaging
+
 #### 0.2
 added function to create new holes and bound it to a button for testing. With the test, as suspected the new holes won't be tracked as the tracking is applied on the DOM initialisation and as such the new elements cloned post initialisation will not be tracked.
 An initial easy fix for part of this problem, the nodelist for `holes` can be redefined if I declare it initially as a `let` statement and re assign it after adding the holes. But the event listener and mutation observer aren't as easy to solve and reapplying them across the whole nodelist will mean there will be multiple stacked on the previously tracked elements which can cause problems and take a lot of unnecessary resources.
