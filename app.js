@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
   let spawnTimer = 2000;
   let fleeTimer = 5000;
   let whackTimer = 1000;
+  const holesToAdd = 3;
 
   // game functionality
 
@@ -73,8 +74,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // level functionality
 
-  function addHoles() {
-    gameArea.appendChild(hole.cloneNode(true));
+  function addHoles(n) {
+    if (n == undefined) {
+      n = 1;
+    }
+    for (let i = 0; i < n; i++) {
+      gameArea.appendChild(hole.cloneNode(true));
+    }
     // maybe have for loop ??
     holes = document.querySelectorAll(".hole");
     console.log(holes);
@@ -124,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 1:
         if (score >= 10) {
           level++;
-          addHoles();
+          addHoles(holesToAdd);
           console.log("level up");
           alert("level up!");
         } else {
@@ -135,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 2:
         if (score >= 15) {
           level++;
-          addHoles();
+          addHoles(holesToAdd);
           console.log("level up");
           alert("level up!");
         } else {
@@ -146,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 3:
         if (score >= 20) {
           level++;
-          addHoles();
+          addHoles(holesToAdd);
           console.log("level up");
           alert("level up!");
         } else {
