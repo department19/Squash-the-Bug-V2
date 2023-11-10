@@ -98,9 +98,10 @@ section {
 	width: 70%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-evenly;
+	justify-content: space-around;
+	align-content: space-around;
 	padding: 10rem;
-	gap: 20rem;
+	gap: 2rem;
 }
 
 .hole {
@@ -113,8 +114,44 @@ section {
 	border: 1px solid #f1be32;
 	border-radius: 25%;
 	cursor: pointer;
+	outline-style: none;
+	-webkit-tap-highlight-color: transparent;
 }
 
 .hidden {
 	display: none;
+}
+
+/* tablets */
+
+@media screen and (max-width: 768px) {
+	#game-area {
+		padding: 10%;
+		/* gap: 1rem; */
+	}
+}
+
+/* phones */
+
+@media screen and (max-width: 480px) {
+	header {
+		display: none;
+	}
+	
+	#game-area {
+		width: auto;
+		padding: 1rem;
+		/* gap: 1rem; */
+	}
+
+	.hole {
+
+	}
+
+	#info-panel {
+		position: relative;
+		top: 0;
+		width: auto;
+		transform: none;
+	}
 }
