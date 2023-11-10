@@ -152,5 +152,7 @@ section {
 		top: 0;
 		width: auto;
 		transform: none;
+		padding-top: 2px;
+		padding-bottom: 5px;
 	}
 }
