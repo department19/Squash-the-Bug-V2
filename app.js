@@ -100,21 +100,18 @@ document.addEventListener("DOMContentLoaded", function() {
         spawnTimer = 2000;
         fleeTimer = 4000;
         whackTimer = 1000;
-        addHoles();
         console.log("difficulty adjusted");
         break;
       case 3:
         spawnTimer = 2000;
         fleeTimer = 3000;
         whackTimer = 1000;
-        addHoles();
         console.log("difficulty adjusted");
         break;
       case 4:
         spawnTimer = 2000;
         fleeTimer = 2000;
         whackTimer = 1000;
-        addHoles();
         console.log("difficulty adjusted");
         break;
     };
@@ -127,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 1:
         if (score >= 10) {
           level++;
+          addHoles();
           console.log("level up");
           alert("level up!");
         } else {
@@ -137,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 2:
         if (score >= 15) {
           level++;
+          addHoles();
           console.log("level up");
           alert("level up!");
         } else {
@@ -147,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
       case 3:
         if (score >= 20) {
           level++;
+          addHoles();
           console.log("level up");
           alert("level up!");
         } else {
