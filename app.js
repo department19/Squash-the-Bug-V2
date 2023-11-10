@@ -30,9 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
   let randomHole;
   let bugFleeTimer;
   let level = 0;
-  let spawnTimer = 2000;
-  let fleeTimer = 5000;
-  let whackTimer = 1000;
+  let spawnTimer;
+  let fleeTimer;
+  // let whackTimer = 1000;
   const holesToAdd = 3;
 
   // game functionality
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (isGameRunning) {
         spawnBug();
       }
-    }, whackTimer);
+    }, spawnTimer);
   }
 
   // level functionality
@@ -96,28 +96,35 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     switch (level) {
       case 1:
-        spawnTimer = 2000;
-        fleeTimer = 5000;
-        whackTimer = 1000;
+        spawnTimer = 1000;
+        fleeTimer = 2000;
         console.log("difficulty adjusted");
         break;
       case 2:
-        spawnTimer = 2000;
-        fleeTimer = 4000;
-        whackTimer = 1000;
+        spawnTimer = 1000;
+        fleeTimer = 1500;
         console.log("difficulty adjusted");
         break;
       case 3:
-        spawnTimer = 2000;
-        fleeTimer = 3000;
-        whackTimer = 1000;
+        spawnTimer = 900;
+        fleeTimer = 1000;
         console.log("difficulty adjusted");
         break;
       case 4:
-        spawnTimer = 2000;
-        fleeTimer = 2000;
-        whackTimer = 1000;
+        spawnTimer = 600;
+        fleeTimer = 750;
         console.log("difficulty adjusted");
+        break;
+      case 5:
+        spawnTimer = 500;
+        fleeTimer = 500;
+        console.log("difficulty adjusted");
+        break;
+      case 6:
+        spawnTimer = 200;
+        fleeTimer = 200;
+        console.log("difficulty adjusted");
+        level = "impossible";
         break;
     };
     levelDisplay.textContent = level;
@@ -160,6 +167,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         break;
       case 4:
+        if (score >= 25) {
+          level++;
+          addHoles(holesToAdd);
+          console.log("level up");
+          alert("level up!");
+        } else {
+          console.log("fail");
+          alert("failed");
+        }
+        break;
+      case 5:
+        if (score >= 25) {
+          level++;
+          console.log("level up");
+          alert("level up!");
+        } else {
+          console.log("fail");
+          alert("failed");
+        }
+        break;
+      case 6:
         console.log("last level complete");
         alert("this is the last level");
         break;
@@ -258,4 +286,5 @@ document.addEventListener("DOMContentLoaded", function() {
   gameStopButton.addEventListener("click", () => {
     stopGame();
   });
+  level = 6;
 });
