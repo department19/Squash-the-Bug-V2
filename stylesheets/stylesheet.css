@@ -39,6 +39,7 @@ body {
 }
 
 /* Standardise */
+
 h1 {
 	font-size: 5rem;
 }
@@ -127,7 +128,6 @@ section {
 @media screen and (max-width: 768px) {
 	#game-area {
 		padding: 10%;
-		/* gap: 1rem; */
 	}
 }
 
@@ -141,7 +141,6 @@ section {
 	#game-area {
 		width: auto;
 		padding: 1rem;
-		/* gap: 1rem; */
 	}
 
 	.hole {

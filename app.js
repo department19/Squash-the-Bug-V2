@@ -81,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function() {
     for (let i = 0; i < n; i++) {
       gameArea.appendChild(hole.cloneNode(true));
     }
-    // maybe have for loop ??
     holes = document.querySelectorAll(".hole");
     console.log(holes);
   }
