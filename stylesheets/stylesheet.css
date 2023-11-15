@@ -35,6 +35,8 @@
 	0 10px 8px rgba(0, 0, 0, .05),
 	0 4px 4px rgba(0, 0, 0, .04),
 	0 2px 2px rgba(0, 0, 0, .03);
+	/* animation */
+	--animation-curve: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html {
@@ -51,19 +53,23 @@ body {
 
 h1 {
 	font-size: 5rem;
+	font-family: Roboto Mono;
 }
 
 h2 {
 	font-size: 4rem;
+	font-family: Roboto Mono;
 	display: inline-block;
 }
 
 h3 {
 	font-size: 3rem;
+	font-family: Lato;
 }
 
 p {
 	font-size: 2rem;
+	font-family: Lato;
 	display: inline-block;
 }
 
@@ -78,8 +84,11 @@ a {
 }
 
 main {
-	scroll-snap-type: y mandatory;
+	position: absolute;
+	top: 0;
+	left: 0;
 	height: 100vh;
+	width: 100%;
 	overflow-y: hidden;
 }
 
@@ -88,20 +97,60 @@ section {
 	margin: 1rem;
 }
 
+.btn {
+	max-height: 6rem;
+    padding: 1rem 1rem;
+	max-width: 15rem;
+    background-color: var(--darkgreen);
+    color: var(--light4);
+	font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: 0.3s ease-in-out;
+	box-shadow: var(--box-shadow);
+}
+
+.btn:hover {
+    background-color:var(--green);
+	color: var(--dark1);
+}
+
 /* header panel */
 
 header {
-
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	padding: 20%;
+	background-color: var(--dark4);
+	z-index: 1;
+	/* display: none; */
 }
 
 header.active {
-	
+	/* transform: translateY(-100%); */
+	animation: headerslide 1s 0.2s var(--animation-curve);
+	animation-fill-mode: forwards;
+}
+
+#button-box {
+	position: absolute;
+	left: 20%;
+	bottom: 20%;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	flex-grow: 0;
+	gap: 0.5rem;
+	/* padding: 0 2rem; */
+	margin-bottom: 2rem;
+	height: 4rem;
 }
 
 /* info panel components */
 
 #info-panel {
-	position: absolute;
+	position: relative;
 	top: 50%;
 	left: 0%;
 	width: 15%;
@@ -110,15 +159,16 @@ header.active {
 	border-radius: var(--border-radius);
 	box-shadow: var(--box-shadow);
 	background-color: var(--dark2);
+	z-index: 0;
 }
 
 /* game area elements */
 
 #game-area {
 	position: relative;
-	top: 40%;
+	top: 0;
 	left: 50%;
-	transform: translate(-40%, -50%);
+	transform: translate(-40%);
 	max-width: 75%;
 	display: flex;
 	flex-wrap: wrap;
@@ -187,5 +237,14 @@ header.active {
 		top: 0;
 		width: auto;
 		transform: none;
+	}
+}
+
+@keyframes headerslide {
+	0% {
+		transform: translateY(0%);
+	}
+	100% {
+		transform: translateY(-100%);
 	}
 }

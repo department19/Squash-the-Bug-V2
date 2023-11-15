@@ -1,9 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-  let holes = document.querySelectorAll(".hole");
-  // will make an arraylike nodelist of the holes
-  // will the const make it not update when i add more?
-  // maybe need to make this a function to update on addition?
+  // UI interaction
+  const headerButton = document.getElementById("header-button");
+  const header = document.querySelector("header");
 
+  headerButton.addEventListener("click", () => {
+    header.classList.add("active");
+  });
+
+  // Game Parts
+
+  let holes = document.querySelectorAll(".hole");
   const scoreDisplay = document.getElementById("score-value");
   const timerDisplay = document.getElementById("timer-value");
   const levelDisplay = document.getElementById("level-value");
