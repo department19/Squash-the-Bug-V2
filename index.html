@@ -18,9 +18,12 @@
 
 <body>
     <header>
-        <div>
+        <div class="header-main">
             <h1>Squash the bug!</h1>
-            <p id="description">A simple game where you click the bugs!</p>            
+            <p id="description">A simple game where you click the bugs!</p>
+        </div>
+        <div id="button-box">
+            <div id="header-button" class="btn">To Game!</div>
         </div>
     </header>
     <main>
@@ -28,10 +31,10 @@
             <div id="level" class="ui"><h2>Level:</h2><span id="level-value"></span></div>
             <div id="score" class="ui"><p>Score:</p><span id="score-value"></span></div>
             <div id="timer" class="ui"><p>Time remaining:</p><span id="timer-value"></span></div>
-            <div id="buttonbox">
-                <button id="startGame" class="gamebutton">Start Game</button>
-                <button id="stopGame" class="gamebutton hidden">Stop Game</button>
-                <button id="addHole" class="hidden">add hole</button>
+            <div>
+                <div id="startGame" class="gamebutton btn">Start Game</div>
+                <div id="stopGame" class="gamebutton hidden btn">Stop Game</div>
+                <div id="addHole" class="btn hidden">add hole</div>
             </div>
         </section>
         <section id="game-area">
