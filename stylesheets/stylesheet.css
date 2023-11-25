@@ -133,6 +133,12 @@ header {
 header.active {
 	animation: headerslide 1s 0.2s var(--animation-curve);
 	animation-fill-mode: forwards;
+
+	#title {
+		position: relative;
+		animation: titleslide 2s 0.4s var(--animation-curve);
+		animation-fill-mode: forwards;
+	}
 }
 
 #button-box {
@@ -244,6 +250,13 @@ header.active {
 		transform: translateY(0%);
 	}
 	100% {
-		transform: translateY(-100%);
+		transform: translateY(calc(-100% + 8rem));
+	}
+}
+
+@keyframes titleslide {
+	to {
+		transform: translateX(-100%);
+		transform: translateY(70vh);
 	}
 }
