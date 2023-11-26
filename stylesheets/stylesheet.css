@@ -279,7 +279,7 @@ header.active {
 		#info-panel {
 			position: absolute;
 			/* top: 0; */
-			bottom: 0;
+			bottom: 5%;
 			width: 90vw;
 			height: 200px;
 			margin: 1rem 5vw;
