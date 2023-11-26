@@ -223,27 +223,50 @@ header.active {
 /* phones */
 
 @media screen and (max-width: 480px) {
+	:root {
+		font-size: 8px;
+	}
+
 	header {
+		padding: 20rem 1rem;
 		display: none;
+
+		#title {
+			font-size: 3rem;
+		}
 	}
 	
-	#game-area {
-		width: auto;
-		padding: 1rem;
+	main {
+		position: absolute;
+		display: flex;
+		
+		#game-area {
+			width: auto;
+			margin: 1rem auto;
+			padding: 1rem;
+			gap: 2rem;
+
+			.hole {
+				width: 8rem;
+				height: 8rem;
+			}
+		}
+		
+		#info-panel {
+			position: absolute;
+			/* top: 0; */
+			bottom: 0;
+			width: 90vw;
+			margin: 1rem 5vw;
+			transform: none;
+			padding-top: 2px;
+			padding-bottom: 5px;
+
+
+		}
 	}
 
-	.hole {
 
-	}
-
-	#info-panel {
-		position: relative;
-		top: 0;
-		width: auto;
-		transform: none;
-		padding-top: 2px;
-		padding-bottom: 5px;
-	}
 }
 
 @keyframes headerslide {
