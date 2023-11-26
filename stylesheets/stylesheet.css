@@ -256,7 +256,6 @@ header.active {
 
 @keyframes titleslide {
 	to {
-		transform: translateX(-100%);
 		transform: translateY(70vh);
 	}
 }
