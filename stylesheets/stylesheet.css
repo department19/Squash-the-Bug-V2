@@ -133,10 +133,11 @@ header {
 header.active {
 	animation: headerslide 1s 0.2s var(--animation-curve);
 	animation-fill-mode: forwards;
-
+	
 	#title {
-		position: relative;
-		animation: titleslide 2s 0.4s var(--animation-curve);
+		/* position: absolute; */
+		/* top: 0; */
+		animation: titleslide 2s 0.2s var(--animation-curve);
 		animation-fill-mode: forwards;
 	}
 }
@@ -247,15 +248,25 @@ header.active {
 
 @keyframes headerslide {
 	0% {
-		transform: translateY(0%);
+		transform: translateY(0);
 	}
 	100% {
-		transform: translateY(calc(-100% + 8rem));
+		transform: translateY(calc(-100vh + 8rem));
 	}
 }
 
 @keyframes titleslide {
-	to {
-		transform: translateY(70vh);
+	0% {
+		position: relative;
+	}
+	50% {
+		position: absolute;
+		top: 0;
+		transform: translate(0);
+	}
+	100% {
+		position: absolute;
+		top: 0;
+		transform: translateY(calc(100vh - (100% + 1rem)));
 	}
 }
