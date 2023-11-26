@@ -202,6 +202,11 @@ header.active {
 	border-radius: var(--border-radius);
 	outline-style: none;
 	-webkit-tap-highlight-color: transparent;
+
+	#bug {
+		width: 90%;
+		height: auto;
+	}
 }
 
 .hole.bug {
@@ -229,7 +234,6 @@ header.active {
 
 	header {
 		padding: 20rem 1rem;
-		display: none;
 
 		#title {
 			font-size: 3rem;
@@ -245,6 +249,7 @@ header.active {
 			margin: 1rem auto;
 			padding: 1rem;
 			gap: 2rem;
+			transform: translateY(-10rem);
 
 			.hole {
 				width: 8rem;
@@ -257,12 +262,15 @@ header.active {
 			/* top: 0; */
 			bottom: 0;
 			width: 90vw;
+			height: 200px;
 			margin: 1rem 5vw;
 			transform: none;
 			padding-top: 2px;
 			padding-bottom: 5px;
 
-
+			#link-box {
+				margin: 2rem 0;
+			}
 		}
 	}
 
