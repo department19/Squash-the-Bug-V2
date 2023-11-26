@@ -84,6 +84,10 @@ a {
 	color: inherit;
 }
 
+.ui {
+	font-family: Roboto Mono;
+}
+
 main {
 	position: absolute;
 	top: 0;
@@ -161,12 +165,17 @@ header.active {
 #info-panel {
 	position: relative;
 	left: 0%;
+	min-width: 25rem;
 	width: 15%;
 	padding: 2rem;
 	border-radius: var(--border-radius);
 	box-shadow: var(--box-shadow);
 	background-color: var(--dark2);
 	z-index: 0;
+
+	#link-box {
+		margin: 2rem 0;
+	}
 }
 
 /* game area elements */
@@ -202,6 +211,11 @@ header.active {
 	border-radius: var(--border-radius);
 	outline-style: none;
 	-webkit-tap-highlight-color: transparent;
+
+	#bug {
+		width: 90%;
+		height: auto;
+	}
 }
 
 .hole.bug {
@@ -212,38 +226,70 @@ header.active {
 	display: none;
 }
 
-/* tablets */
+/* smaller screens */
 
-@media screen and (max-width: 768px) {
+@media (max-width: 1500px) {
+	h2 {
+		font-size: 3rem;
+	}
+
 	#game-area {
 		padding: 10%;
 	}
 }
 
+@media (max-width: 1100px) {
+	#info-panel {
+
+	}
+}
+
 /* phones */
 
-@media screen and (max-width: 480px) {
+@media (max-width: 480px) {
+	:root {
+		font-size: 8px;
+	}
+
 	header {
-		display: none;
+		padding: 20rem 1rem;
+
+		#title {
+			font-size: 3rem;
+		}
 	}
 	
-	#game-area {
-		width: auto;
-		padding: 1rem;
+	main {
+		position: absolute;
+		display: flex;
+		
+		#game-area {
+			width: auto;
+			margin: 1rem auto;
+			padding: 1rem;
+			gap: 2rem;
+			transform: translateY(-10rem);
+
+			.hole {
+				width: 8rem;
+				height: 8rem;
+			}
+		}
+		
+		#info-panel {
+			position: absolute;
+			/* top: 0; */
+			bottom: 0;
+			width: 90vw;
+			height: 200px;
+			margin: 1rem 5vw;
+			transform: none;
+			padding-top: 2px;
+			padding-bottom: 5px;
+		}
 	}
 
-	.hole {
 
-	}
-
-	#info-panel {
-		position: relative;
-		top: 0;
-		width: auto;
-		transform: none;
-		padding-top: 2px;
-		padding-bottom: 5px;
-	}
 }
 
 @keyframes headerslide {
