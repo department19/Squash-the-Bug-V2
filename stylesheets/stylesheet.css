@@ -167,6 +167,10 @@ header.active {
 	box-shadow: var(--box-shadow);
 	background-color: var(--dark2);
 	z-index: 0;
+
+	#link-box {
+		margin: 2rem 0;
+	}
 }
 
 /* game area elements */
@@ -267,10 +271,6 @@ header.active {
 			transform: none;
 			padding-top: 2px;
 			padding-bottom: 5px;
-
-			#link-box {
-				margin: 2rem 0;
-			}
 		}
 	}
 
