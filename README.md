@@ -41,6 +41,11 @@ I decided to make this "whack-a-mole" style game as having the mouse input as th
 ## Responsiveness Considerations
 Using `@media` rules, currently the game should be playable on mobile devices, and the game area is also adjusted for smaller screens too. Though further testing is required to see across varying mobile devices.
 
+the current buttons are `div` elements which isn't very good for screen readers
+
+**update**
+With changes made to the UI for the final aesthetic and removal of wireframe outlines completely negated any of previous adjustments for responsiveness. Hence many elements have been individually changed to make the web game work on the varying screen sizes and mobile formats.
+
 ## Bugs
 - ~~constant problem of the childNode of bug not existing when attempting removal~~
 	- the timings on class removal and were off, and as such the mutation observer wasn't functioning properly.
@@ -52,7 +57,20 @@ Using `@media` rules, currently the game should be playable on mobile devices, a
 - [Mutation observer](#mutation-observer)
 - [Core Mechanics Rework](#core-mechanics-rework)
 
+### User Interface 
+#### 0.2
+made the header not completely slide off the screen and retain itself at the top as a title bar, the title "Squash the bug" also slides down to present itself.
+
+#### 0.1
+properly using flex to centre the 2 main elements in the window, being the `info-panel` and `game-area` and adjusted the spacing and sizing of the holes for each screen size. Re added the header page  for all screen sizes and made the header a sliding cover page that goes away on a button click.
+
 ### Responsiveness additions 
+
+#### 0.2
+After the UI revamp, everything for phones and smaller screen broke, for the smaller screens, the @media rules and adjusting the size of elements which could be done by either selectively targeting and manual number changes of elements, or by inserting font size changes in the `@media` rule using the `:root` selector.
+As for phone screen sizes, simply adjusting the size of elements wouldn't be enough so using `position` absolute and relative properties the info panel is bound to the bottom of the screen and centred width ways.
+The game-area on the other hand, still needed to be able shift and move to adapt to the increasing number of holes as the difficultly increases and so the flex property is still desired, in this case using `transform: translate` the game area can be used to position the game area a little better after the flex rules have been applied to make it fit optimally.
+
 #### 0.1
 Using the `@media` rule, the game now positions the game area and holes in a playable manner. I for the mean time completely removed the header for mobile devices to accommodate more space.
 I also adjusted the flexbox properties to place the holes better across all devices since the previous gaps of 10rem were way too much.
